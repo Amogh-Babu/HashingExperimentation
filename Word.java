@@ -77,9 +77,13 @@ public class Word<T> {
         return true;
     }
 
-    //TODO
     public int hashCode() {
-        return -1;
+        int code = 0;
+        for (T item : slice) {
+            code = code * 31 + item.hashCode();
+        }
+
+        return code;
     }
 
     public String toString() {
