@@ -15,26 +15,44 @@ public class WordSearch<T> {
         wordSearch();
     }
 
-    //TODO
     // if the given word is valid then mark it as seen in the hash table.
     // this operation should run in constant time.
     private void addIfWord(Word<T> word) {
+        if (seen.contains(word)) {
+            seen.insert(word, true);
+        }
     }
 
-    //TODO
     // returns the number of valid words found in the grid.
     // this operation should run in linear time in terms of the
     // size of the data structure.
     public int countWords() {
-        return -1;
+        int count = 0;
+        List<Word<T>> keys = seen.getKeys();
+        List<Boolean> values = seen.getValues();
+
+        for (int i = 0; i < keys.size(); i++) {
+            if (values.get(i)) {
+                count++;
+            }
+        }
+        return count;
     }
 
-    //TODO
     // returns the list of valid words found in the grid.
     // this operation should run in linear time in terms of the
     // size of the data structure.
     public List<Word<T>> getWords() {
-        return new ArrayList<>();
+        ArrayList<Word<T>> words = new ArrayList<>();
+        List<Word<T>> keys = seen.getKeys();
+        List<Boolean> values = seen.getValues();
+
+        for (int i = 0; i < keys.size(); i++) {
+            if (values.get(i)) {
+                words.add(keys.get(i));
+            }
+        }
+        return words;
     }
 
     // Performs the word search.
